@@ -1,0 +1,38 @@
+/* 
+    default.css
+*/
+
+root { 
+    display: block;
+}
+
+h1 {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 32px;
+    color: #3300ff;
+}
+
+h1.header {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 32px;
+    color: #cc0000;
+}
+
+table, p {
+    font-family: Geneva,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+.partial {
+    background-color: #D0D0D0;
+}
+
+#invert {
+   background-color: #C0C0C0;
+   color: #3300ff ;
+}
+
+a:hover { 
+    background-color: yellow;
+}
+
