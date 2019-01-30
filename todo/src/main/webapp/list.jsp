@@ -11,6 +11,7 @@
         <jsp:useBean id="bean" scope="request" class="mvc.beans.ViewModel"/>
         <div class="pageContent">
             <!--  This is the master page with a list of entities -->
+            Logged in as: <c:out value="${user.name}" /> <a href="logout.jsp">Logout</a>
             <table>
                 <thead>
                     <tr>
@@ -23,7 +24,7 @@
                 <tbody>
                     <c:forEach var="item" items="${bean.todoList}">
                         <tr>
-                            <td>${item.id}</td>
+                            <td><a href="details.jsp?id=${item.id}">${item.id}</a></td>
                             <td>${item.text}</td>
                             <td>${item.dateTime}</td>
                             <td>${item.done}</td>

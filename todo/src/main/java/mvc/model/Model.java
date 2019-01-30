@@ -34,5 +34,15 @@ public enum Model {
         return null;
     }
 
-    // TODO Other methods called by new actions
+    public void add(TodoNote note) {
+        list.add(note);
+    }
+
+    public void delete(Long id) {
+        list.delete(id);
+    }
+
+    public void edit(Long id, String text) {
+        list.edit(id, text);
+    }
 }

@@ -4,17 +4,15 @@
 package mvc.control;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mvc.model.Model;
+import mvc.model.TodoList;
 import mvc.model.TodoNote;
 import mvc.model.User;
 
@@ -62,11 +60,43 @@ public class FrontController extends HttpServlet {
                 }
                 break;
             }
+            case "update":
+            {
+                Long id = Long.parseLong(req.getParameter("id"));
+                String text = req.getParameter("text");
+                Model.INSTANCE.edit(id, text);
+                resp.sendRedirect("/todo/list.jsp");
+                break;
+            }
+            case "delete":
+            {
+                Long id = Long.parseLong(req.getParameter("id"));
+                Model.INSTANCE.delete(id);
+                resp.sendRedirect("/todo/list.jsp");
+                break;
+            }
+            case "add":
+            {
+                Long id = findNextId();
+                String text = req.getParameter("text");
+                TodoNote note = new TodoNote(id, text);
+                Model.INSTANCE.add(note);
+                resp.sendRedirect("/todo/list.jsp");
+                break;
+            }
             default:
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 // TODO Other POST actions
         }
         // PRG pattern
+    }
+
+    private Long findNextId() {
+        TodoList list = Model.INSTANCE.getList();
+        //Returns sorted so that is nice
+        List<TodoNote> notes = list.getNotes();
+        Long id = notes.get(notes.size() - 1).getId() + 1;
+        return id;
     }
 
 }

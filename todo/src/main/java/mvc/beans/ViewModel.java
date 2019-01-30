@@ -30,6 +30,10 @@ public class ViewModel {
         todoListObject = Model.INSTANCE.getList();
         todoList = todoListObject.getNotes();
     }
+
+    public TodoNote getById(Long id) {
+        return todoListObject.getById(id);
+    }
     // TODO Supply data to JSP pages
    
    
