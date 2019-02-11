@@ -1,0 +1,43 @@
+*** README ***
+
+A server side MVC web application for a library using
+Java Enterprise Edition (similar to .NET)
+
+This is a NetBeans 8.2 Java Enterprise Maven project
+running on GlassFish 4.1.2
+
+If using the above everything should work out of the box. 
+
+Directory layout (in Project view)
+- Web Pages/WEB-INF configuration files
+- Web Pages/* public part of application accessible with URL's
+- Source Packages, Java code organized in MVC style
+    - control is control
+    - core is (very small) model of library
+    - dao contains classes to handle the model (CRUD for now)
+    - service and util, service classes and utilities
+- Test Packages is JUnit tests
+- Other Sources ... Java Dependencies, not used much for now except
+  Dependencies, the auxiliary software used 
+- Project Files, contains the Maven project definition file pom.xml
+  if trashed project will not work!
+
+JEE Techniques used
+- Java Server Faces for the pages (xhtml-files)
+- Facelets templating system (modular pages).
+- Stateless Enterprise Java Beans (EJB), needed later when using real
+  database, transaction aware objects.
+- Java Context and dependency injection (CDI) makes java objects accessible 
+  from JSF pages, used in control layer. Also supports injection.
+- Java Bean validation for validating objects attributes (see Author @NotNull)
+- PrettyFaces for URL rewriting (sematic URLs)
+- BootFaces for page design/layout
+- Lombok 3rd party annotations for generation of setter/getter and more.
+
+Testing (not implemented) can be done using JUnit.
+
+
+
+
+
+

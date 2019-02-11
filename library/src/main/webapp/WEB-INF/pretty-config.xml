@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+                      
+    <url-mapping id="home"> 
+        <pattern value="/" /> 
+        <view-id value="/index.xhtml" />
+    </url-mapping> 
+    <url-mapping id="view-authors">
+        <pattern value="/authors" />
+        <view-id value="/author/list.xhtml" />
+    </url-mapping>
+    <url-mapping id="delete-author">
+        <pattern value="/authors/delete/#{id}"/> 
+        <view-id value="/author/delete.xhtml?id=#{id}" />
+    </url-mapping>
+    <url-mapping id="edit-author">
+        <pattern value="/authors/edit/#{id}"/> 
+        <view-id value="/author/edit.xhtml?id=#{id}" />
+    </url-mapping>
+    
+</pretty-config>    

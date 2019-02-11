@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="../template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">  
+    <h:outputStylesheet library="css" name="default.css"  />
+    
+    <ui:define name="content"> 
+        <f:metadata>
+            <f:viewParam name="id" value="#{auth.tmp.id}"/>
+            <f:viewAction action="#{auth.setAuthor()}"/>
+        </f:metadata>
+
+       
+        <b:form>
+            <b:row >
+                <b:column span="12">
+                    <h2>Delete</h2>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Id" />
+                </b:column>
+                <b:inputText value="#{auth.tmp.id}" size="5" span="2" placeholder="Id" 
+                             disabled="true"  />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="First name" />
+                </b:column>
+                <b:inputText value="#{auth.tmp.firstName}" size="10" span="2" 
+                             disabled="true" />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Last name" />
+                </b:column>
+                <b:inputText value="#{auth.tmp.lastName}" size="10" span="2" disabled="true"  />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Email" />
+                </b:column>
+                <b:inputText value="#{auth.tmp.email}" size="15" span="2" disabled="true"  />  
+            </b:row>
+            <b:row>
+                <b:commandButton value="Done"  look="primary" span="2"
+                                 actionListener="#{auth.delete()}" action="pretty:view-authors"/>
+                <b:commandButton value="Cancel"  look="info" span="2"
+                                 actionListener="#{auth.cancel()}" immediate="true" action="pretty:view-authors"/>
+            </b:row>
+        </b:form>
+    </ui:define>
+</ui:composition>   

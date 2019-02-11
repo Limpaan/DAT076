@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+
+    <ui:define name="content"> 
+        <c:set var="root" value="#{request.contextPath}" /> 
+        <b:row>
+            <b:column span="12">
+                <h2>Authors</h2>
+            </b:column>
+        </b:row>            
+        <b:row>
+            <b:form id="author">
+                <b:label value="Add Author" span="2" severity="info" />
+                <b:inputText id="id" value="#{auth.tmp.id}" size="5" span="1" placeholder="Id" required="true" />
+                <b:inputText id="firstName" value="#{auth.tmp.firstName}" size="10" span="2" placeholder="First name" required="true" />
+                <b:inputText id="lastName" value="#{auth.tmp.lastName}" size="10" span="2" placeholder="Last name" required="true"/>
+                <b:inputText id="email" value="#{auth.tmp.email}" size="15" span="2" placeholder="Email"/>
+                <b:commandButton value="Add"  look="primary" span="2"
+                                 actionListener="#{auth.add()}"/>
+                <b:commandButton value="Clear"  look="warning" span="1" size="xs"
+                                 action="#{auth.cancel()}" immediate="true"/>
+            </b:form>
+        </b:row>
+        <b:row>
+            <b:messages/>
+        </b:row>
+        <!--
+            ajax:auth.test(5);   onpage="console.log(pageIndex); 
+        onpage="console.log(me);"
+        -->
+        <b:row>
+            <b:form id="authorForm">
+                <b:dataTable  
+                    id="authorTable"  
+                    widgetVar="me"
+                    var="a" value="#{auth.findAll()}" span="12" 
+                    striped="true"
+                    page-length-menu="5,10,20"
+                    page-length="5"
+                    onpage="console.log(me); ajax:auth.page()"
+                    >             
+                    <b:dataTableColumn value="#{a.id}" order="asc"  />
+                    <b:dataTableColumn value="#{a.lastName}" />
+                    <b:dataTableColumn value="#{a.firstName}" />
+                    <b:dataTableColumn value="#{a.email}" />
+                    <b:dataTableColumn value="#{a.address}" />     
+                    <b:dataTableColumn label="Edit" orderable="false" >
+                        <!--Can't use h:link will check navigation cases--> 
+                        <!--Should not use use h:commandLink it's a post -->
+
+                        <!--Below is possible -->
+                        <!--<b:button href="#{root}/authors/edit/#{a.id}" value="Edit" /> -->
+
+                        <h:outputLink value="#{root}/authors/edit/#{a.id}">Edit</h:outputLink>
+
+                    </b:dataTableColumn>
+                    <b:dataTableColumn label="Delete" orderable="false">
+                        <h:outputLink value="#{root}/authors/delete/#{a.id}">Delete</h:outputLink>
+
+                        <!--<h:link value="Delete" outcome="delete.xhtml" >  
+                            <f:param name="id" value="#{a.id}"/>
+                        </h:link>-->
+                    </b:dataTableColumn> 
+                    <!--<f:ajax listener="${auth.test()}"/>-->
+                </b:dataTable>
+            </b:form>
+        </b:row>
+    </ui:define>
+</ui:composition>

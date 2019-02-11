@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Library</title>
+    </h:head>
+
+    <!-- This is common structure for all pages (defining the slots) -->
+    <h:body>
+
+        <c:set var="root" value="#{request.contextPath}" /> 
+        <b:image library="img" name="banner.jpg" height="250" />
+    
+        <b:navBar brand="Library" brandHref="${root}" fixed="top" inverse="true">
+            <b:navbarLinks>
+                <b:navLink value="Authors" href="${root}/author/list.xhtml"></b:navLink>
+                <b:navLink value="Books" href="${root}/book/list.xhtml"></b:navLink>
+                <b:navLink value="About" href="#"></b:navLink>
+                <b:navLink value="Contact" href="#"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+       <!-- A slot to put some content in -->
+        <b:container>
+            <ui:insert name="content"/>
+        </b:container>
+       
+    </h:body>
+
+</html>
