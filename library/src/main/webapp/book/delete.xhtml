@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="../template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:outputStylesheet library="css" name="default.css"  />
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{book.tmp.isbn}"/>
+            <f:viewAction action="#{book.setBook()}"/>
+        </f:metadata>
+
+
+        <b:form>
+            <b:row >
+                <b:column span="12">
+                    <h2>Delete</h2>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="ISBN" />
+                </b:column>
+                <b:inputText value="#{book.tmp.isbn}" size="5" span="2" placeholder="ISBN"
+                             disabled="true"  />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Title" />
+                </b:column>
+                <b:inputText value="#{book.tmp.title}" size="10" span="2"
+                             disabled="true" />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Genre" />
+                </b:column>
+                <b:inputText value="#{book.tmp.genre}" size="10" span="2" disabled="true"  />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Price" />
+                </b:column>
+                <b:inputText value="#{book.tmp.price}" size="15" span="2" disabled="true"  />
+            </b:row>
+            <b:row>
+                <b:commandButton value="Done"  look="primary" span="2"
+                                 actionListener="#{book.delete()}" action="pretty:view-books"/>
+                <b:commandButton value="Cancel"  look="info" span="2"
+                                 actionListener="#{book.cancel()}" immediate="true" action="pretty:view-books"/>
+            </b:row>
+        </b:form>
+    </ui:define>
+</ui:composition>

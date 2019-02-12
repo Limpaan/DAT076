@@ -7,6 +7,5 @@ package chl.hajo.library.core;
  */
 //Core model class
 public enum Genre {
-    THRILLER, NOVEL, ROMANTIC_NOVEL, BIOGRAPHY; 
-    
+    THRILLER, NOVEL, ROMANTIC_NOVEL, BIOGRAPHY;
 }

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="../template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:outputStylesheet library="css" name="default.css"  />
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{book.tmp.isbn}" />
+            <f:viewAction action="#{book.setBook()}" />
+        </f:metadata>
+
+        <b:form>
+            <b:row>
+                <b:column span="12">
+                    <h2>Edit</h2>
+                </b:column>
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="ISBN" />
+                </b:column>
+                <b:inputText value="#{book.tmp.isbn}" size="5" span="2" placeholder="ISBN"
+                             disabled="true" />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Title" />
+                </b:column>
+                <b:inputText value="#{book.tmp.title}" size="10" span="2"   />
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Genre" />
+                </b:column>
+                <b:selectOneMenu id="genre" value="#{book.tmp.genre}" size="10" span="2" required="true">
+                    <f:selectItem itemLabel="Thriller" itemValue="#{book.getGenre(0)}" />
+                    <f:selectItem itemLabel="Novel" itemValue="#{book.getGenre(1)}" />
+                    <f:selectItem itemLabel="Romantic Novel" itemValue="#{book.getGenre(2)}" />
+                    <f:selectItem itemLabel="Biography" itemValue="#{book.getGenre(3)}" />
+                </b:selectOneMenu>
+            </b:row>
+            <b:row>
+                <b:column span="2">
+                    <h:outputLabel value="Price" />
+                </b:column>
+                <b:inputText id="price" value="#{book.tmp.price}" size="5" span="1" mask="numeric" required="true" />
+            </b:row>
+            <b:row>
+                <b:commandButton value="Done"  look="primary" span="2"
+                                 actionListener="#{book.update()}" action="pretty:view-books"/>
+                <b:commandButton value="Cancel"  look="info" span="2"
+                                 actionListener="#{book.cancel()}" action="pretty:view-books" immediate="true"/>
+            </b:row>
+        </b:form>
+    </ui:define>
+
+</ui:composition>

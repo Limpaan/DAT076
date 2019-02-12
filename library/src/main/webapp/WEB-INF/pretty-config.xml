@@ -20,5 +20,20 @@
         <pattern value="/authors/edit/#{id}"/> 
         <view-id value="/author/edit.xhtml?id=#{id}" />
     </url-mapping>
-    
+
+
+    <url-mapping id="view-books">
+        <pattern value="/books" />
+        <view-id value="/book/list.xhtml" />
+    </url-mapping>
+    <url-mapping id="delete-book">
+        <pattern value="/books/delete/#{id}"/>
+        <view-id value="/book/delete.xhtml?id=#{id}" />
+    </url-mapping>
+    <url-mapping id="edit-book">
+        <pattern value="/books/edit/#{id}"/>
+        <view-id value="/book/edit.xhtml?id=#{id}" />
+    </url-mapping>
+
+
 </pretty-config>    

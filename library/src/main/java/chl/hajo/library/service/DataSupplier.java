@@ -2,6 +2,9 @@ package chl.hajo.library.service;
 
 import chl.hajo.library.core.Address;
 import chl.hajo.library.core.Author;
+import chl.hajo.library.core.Book;
+import chl.hajo.library.core.Genre;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,4 +42,23 @@ public class DataSupplier {
         return authors;
     }
 
+    public static List<Book> getBooks() {
+        List<Book> books = new ArrayList<>();
+        String[] bookData = {
+                "9789188681010;Isfiskaren;THRILLER;35",
+                "9789188545480;Falco;THRILLER;58",
+                "9789175038209;1793;BIOGRAPHY;39",
+                "9789100142698;Lazarus;NOVEL;79",
+                "9789188681027;Sillbaronen;NOVEL;35",
+                "9789150924688;Du kommer inte undan;ROMANTIC_NOVEL;29",
+                "9789177834328;Lär dig klockan med Greta Gris;ROMANTIC_NOVEL;55"
+        };
+        for (String s : bookData) {
+            String[] d = s.split(";");
+            Book b = new Book(d[0], d[1], Double.parseDouble(d[3]));
+            b.setGenre(Genre.valueOf(d[2]));
+            books.add(b);
+        }
+        return books;
+    }
 }

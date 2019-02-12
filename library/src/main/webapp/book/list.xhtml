@@ -1,12 +1,65 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title>Title</title>
-</head>
-<body>
+<?xml version='1.0' encoding='UTF-8' ?>
 
-</body>
-</html>
+<ui:composition template="../template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:outputStylesheet library="css" name="default.css"  />
+
+    <ui:define name="content">
+        <c:set var="root" value="#{request.contextPath}" />
+
+        <b:row>
+            <b:column span="12">
+                <h2>Books</h2>
+            </b:column>
+        </b:row>
+
+        <!-- A table to add books to the "database" -->
+        <b:row>
+            <b:form id="book">
+                <b:label value="Add Book" span="2" severity="info" />
+                <b:inputText id="isbn" value="#{book.tmp.isbn}" size="5" span="1" mask="9999999999999" placeholder="ISBN" required="true" />
+                <b:inputText id="title" value="#{book.tmp.title}" size="10" span="2" placeholder="Title" required="true" />
+                <b:selectOneMenu id="genre" value="#{book.tmp.genre}" size="10" span="2" required="true">
+                    <f:selectItem itemLabel="Thriller" itemValue="#{book.getGenre(0)}" />
+                    <f:selectItem itemLabel="Novel" itemValue="#{book.getGenre(1)}" />
+                    <f:selectItem itemLabel="Romantic Novel" itemValue="#{book.getGenre(2)}" />
+                    <f:selectItem itemLabel="Biography" itemValue="#{book.getGenre(3)}" />
+                </b:selectOneMenu>
+                <b:inputText id="price" value="#{book.tmp.price}" size="5" span="1" mask="numeric" required="true" />
+                <b:commandButton value="Add" look="primary" span="1" actionListener="#{book.add()}" />
+                <b:commandButton value="Clear" look="warning" span="1" action="#{book.cancel()}" immediate="true" />
+            </b:form>
+        </b:row>
+
+        <!-- A table for books and genres -->
+        <b:row>
+            <b:form id="bookForm">
+                <b:dataTable
+                    id="bookTable"
+                    widgetVar="me"
+                    var="b" value="#{book.findAll()}" span="12"
+                    striped="true"
+                    page-length-menu="5,10,20"
+                    page-length="5"
+                    onpage="console.log(me); ajax:book.page()"
+                    >
+                    <b:dataTableColumn value="#{b.isbn}" order="asc" />
+                    <b:dataTableColumn value="#{b.title}" />
+                    <b:dataTableColumn value="#{b.genre}" />
+                    <b:dataTableColumn value="#{b.price}" />
+                    <b:dataTableColumn label="Edit" orderable="false" >
+                        <h:outputLink value="#{root}/books/edit/#{b.isbn}">Edit</h:outputLink>
+                    </b:dataTableColumn>
+                    <b:dataTableColumn label="Delete" orderable="false" >
+                        <h:outputLink value="#{root}/books/delete/#{b.isbn}">Delete</h:outputLink>
+                    </b:dataTableColumn>
+                </b:dataTable>
+            </b:form>
+        </b:row>
+    </ui:define>
+</ui:composition >
