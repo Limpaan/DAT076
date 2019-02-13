@@ -24,6 +24,13 @@ public class DataSupplier {
         return ADDRS[RAND.nextInt(ADDRS.length)];
     }
 
+    public static Author getRandomAuthor() {
+        List<Author> authors = getAuthors();
+        Random rand = new Random();
+        int i = rand.nextInt(authors.size());
+        return authors.get(i);
+    }
+
     public static List<Author> getAuthors() {
         List<Author> authors = new ArrayList<>();
         String[] auths = {
@@ -57,6 +64,7 @@ public class DataSupplier {
             String[] d = s.split(";");
             Book b = new Book(d[0], d[1], Double.parseDouble(d[3]));
             b.setGenre(Genre.valueOf(d[2]));
+            b.setAuthor(getRandomAuthor());
             books.add(b);
         }
         return books;

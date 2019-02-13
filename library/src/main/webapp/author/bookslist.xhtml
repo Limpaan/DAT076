@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam name="id" value="#{auth.tmp.id}" />
+            <f:viewAction action="#{auth.setAuthor()}" />
+        </f:metadata>
+
+        <b:row>
+            <b:column span="12">
+                <h2>Books by #{auth.tmp.getFullName()}</h2>
+            </b:column>
+        </b:row>
+
+        <b:row>
+            <b:dataTable
+                id="authorBookTable"
+                widgetVar="me"
+                var="b" value="#{book.findAllFromAuthor(auth.tmp)}" span="12"
+                striped="false"
+                page-length-menu="5,10,20"
+                page-length="5"
+                >
+                <b:dataTableColumn value="#{b.isbn}" order="asc" />
+                <b:dataTableColumn value="#{b.title}" />
+                <b:dataTableColumn value="#{b.genre}" />
+                <b:dataTableColumn value="#{b.price}" />
+            </b:dataTable>
+        </b:row>
+
+        <b:form>
+            <b:row>
+                <b:commandButton value="Back"  look="info" span="2"
+                                 actionListener="#{auth.cancel()}" immediate="true" action="pretty:view-authors"/>
+            </b:row>
+        </b:form>
+    </ui:define>
+</ui:composition>

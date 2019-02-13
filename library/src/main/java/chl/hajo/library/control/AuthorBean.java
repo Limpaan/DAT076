@@ -5,9 +5,13 @@ import chl.hajo.library.dao.AuthorRegistry;
 import chl.hajo.library.service.DataSupplier;
 import java.io.Serializable;
 import static java.lang.System.out;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +37,7 @@ import net.bootsfaces.component.dataTable.DataTable;
 @Named("auth")
 //@RequestScoped
 @SessionScoped
+//@ViewScoped
 public class AuthorBean implements Serializable {
 
     private static final Logger LOG = Logger.getLogger(AuthorBean.class.getName());
@@ -61,11 +66,35 @@ public class AuthorBean implements Serializable {
 
     // --------- Call backend -------------------------
     public void setAuthor() {
+        if(tmp == null || tmp.getId() == null) {
+            String s = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+            tmp.setId(s);
+        }
         tmp = areg.find(tmp.getId());
+
     }
 
     public List<Author> findAll() {
         return areg.findAll();
+    }
+
+    public List<Author> findAllSorted() {
+        List<Author> toBeSorted = new ArrayList(areg.findAll());
+        toBeSorted.sort(new Comparator<Author>() {
+            @Override
+            public int compare(Author a1, Author a2) {
+                int ret;
+
+                ret = a1.getLastName().compareToIgnoreCase(a2.getLastName());
+
+                if(ret == 0)
+                    ret = a1.getFirstName().compareToIgnoreCase(a2.getFirstName());
+
+                return ret;
+            }
+        });
+
+        return toBeSorted;
     }
 
     public void add() {

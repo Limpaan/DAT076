@@ -31,8 +31,13 @@
                     <f:selectItem itemLabel="Biography" itemValue="#{book.getGenre(3)}" />
                 </b:selectOneMenu>
                 <b:inputText id="price" value="#{book.tmp.price}" size="5" span="1" mask="numeric" required="true" />
+                <b:selectOneMenu id="author" value="#{book.tmp.author}" size="10" span="2" required="true" >
+                    <c:forEach var="a" items="#{auth.findAllSorted()}">
+                        <f:selectItem itemLabel="#{a.lastName}, #{a.firstName}" itemValue="#{a}"/>
+                    </c:forEach>
+                </b:selectOneMenu>
                 <b:commandButton value="Add" look="primary" span="1" actionListener="#{book.add()}" />
-                <b:commandButton value="Clear" look="warning" span="1" action="#{book.cancel()}" immediate="true" />
+                <b:commandButton value="Clear" look="warning" span="1" action="#{book.cancel()}" />
             </b:form>
         </b:row>
 
@@ -50,6 +55,7 @@
                     >
                     <b:dataTableColumn value="#{b.isbn}" order="asc" />
                     <b:dataTableColumn value="#{b.title}" />
+                    <b:dataTableColumn label="Author" value="#{b.author.getFullName()}" />
                     <b:dataTableColumn value="#{b.genre}" />
                     <b:dataTableColumn value="#{b.price}" />
                     <b:dataTableColumn label="Edit" orderable="false" >

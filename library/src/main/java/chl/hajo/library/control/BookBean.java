@@ -1,5 +1,6 @@
 package chl.hajo.library.control;
 
+import chl.hajo.library.core.Author;
 import chl.hajo.library.core.Book;
 import chl.hajo.library.core.Genre;
 import chl.hajo.library.dao.AuthorRegistry;
@@ -45,6 +46,10 @@ public class BookBean implements Serializable {
 
     public List<Book> findAll() {
         return bcat.findAll();
+    }
+
+    public List<Book> findAllFromAuthor(Author author) {
+        return bcat.findAllFromAuthor(author);
     }
 
     public Genre getGenre(int index) {

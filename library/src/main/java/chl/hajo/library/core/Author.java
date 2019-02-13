@@ -42,6 +42,10 @@ public class Author implements Serializable {
         this.address = address;
     }
 
+    public String getFullName() {
+        return lastName + ", " + firstName;
+    }
+
     @Override
     public String toString() {
         return "Author{" + "id=" + id + ", firstName="

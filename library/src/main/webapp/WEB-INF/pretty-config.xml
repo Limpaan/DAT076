@@ -20,6 +20,10 @@
         <pattern value="/authors/edit/#{id}"/> 
         <view-id value="/author/edit.xhtml?id=#{id}" />
     </url-mapping>
+    <url-mapping id="bookslist-author">
+        <pattern value="/authors/bookslist/#{id}" />
+        <view-id value="/author/bookslist.xhtml?id=#{id}"/>
+    </url-mapping>
 
 
     <url-mapping id="view-books">

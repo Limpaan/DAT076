@@ -24,7 +24,7 @@
                 <b:commandButton value="Add"  look="primary" span="2"
                                  actionListener="#{auth.add()}"/>
                 <b:commandButton value="Clear"  look="warning" span="1" size="xs"
-                                 action="#{auth.cancel()}" immediate="true"/>
+                                 action="#{auth.cancel()}" />
             </b:form>
         </b:row>
         <b:row>
@@ -44,8 +44,10 @@
                     page-length-menu="5,10,20"
                     page-length="5"
                     onpage="console.log(me); ajax:auth.page()"
-                    >             
-                    <b:dataTableColumn value="#{a.id}" order="asc"  />
+                    >
+                    <b:dataTableColumn label="ID" order="asc" >
+                        <h:outputLink value="#{root}/authors/bookslist/#{a.id}">#{a.id}</h:outputLink>
+                    </b:dataTableColumn>
                     <b:dataTableColumn value="#{a.lastName}" />
                     <b:dataTableColumn value="#{a.firstName}" />
                     <b:dataTableColumn value="#{a.email}" />
